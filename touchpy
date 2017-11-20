@@ -1,0 +1,11 @@
+#!/bin/bash
+
+str=$1
+
+if [[ $str =~ .py ]]; then
+    name=$str
+else
+    name="${str}.py"
+fi
+
+echo '# -*- coding: utf-8 -*-' > $name
