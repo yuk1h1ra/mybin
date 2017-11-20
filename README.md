@@ -12,3 +12,8 @@ sudo a+x /usr/local/bin/file_name
 ## ping8
 ping 8.8.8.8の省略
 
+## touchpy
+pythonファイルを作成する
+拡張子が書かれていない場合でも、末尾に".py"をつけて作成
+また、１行目にutf-8で記述する旨を追加
+
