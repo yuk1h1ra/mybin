@@ -1,10 +1,9 @@
 # mybin
 
 # 使い方
-作成したファイルを/usr/local/bin以下にコピーしましょう
+cloneしたファイルをPATHに追加しよう
 実行権限も与えましょう
 ```
-cp file_name /usr/local/bin/
 sudo a+x /usr/local/bin/file_name
 ```
 
