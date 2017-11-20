@@ -4,7 +4,7 @@
 cloneしたファイルをPATHに追加しよう
 実行権限も与えましょう
 ```
-sudo a+x /usr/local/bin/file_name
+chmod +x file_name
 ```
 
 # 作成したコマンドの説明
