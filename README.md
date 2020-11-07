@@ -1,23 +1,43 @@
 # mybin
 
-# 使い方
-cloneしたファイルをPATHに追加しよう
-実行権限も与えましょう
+## Description
+
+.bashrc/.zshrcなどに記述していたスクリプト群を一元管理したいというモチベーションからこのリポジトリを作成。
+基本的にはオレオレスクリプトなので、README通りにしたけど動かないや、追加機能の対応などはしない方針。
+必要だと思った機能を思いついたときに更新していく。
+
+## Set up
+
+## このリポジトリにpathを通す
+
+mybinのあるディレクトリ構造を確認する。
+
+```bash
+$ pwd
+/home/yuk1h1ra/[repositories]/mybin
 ```
-chmod +x file_name
+
+[Prezto](https://github.com/sorin-ionescu/prezto)を使用しているため、`~/.zprofile`のpath部分に追記する
+
+```.zprofile
+(中略)
+# Set the list of directories that Zsh searches for programs.
+path=(
+  /usr/local/{bin,sbin}
+  /home/yuk1h1ra/[repositories]/mybina
+  $path
+)
+(中略)
 ```
 
-# 作成したコマンドの説明
+## Commands
 
-## dog
-ファイルを引数に数個指定する  
-そのうちどれか一つを独断的(dogmatize)に決定し、表示させる  
+### hugo-new-post
 
-## ping8
-ping 8.8.8.8の省略
+[blog-with-hugo](https://github.com/yuk1h1ra/blog-with-hugo)では、ブログ記事を`posts/:year/:month/article`になるようにしている。そのため、新しくブログ記事を作成する際のタイプ量を減らすhugoのラッパーコマンドである。
 
-## touchpy
-pythonファイルを作成する  
-拡張子が書かれていない場合でも、末尾に".py"をつけて作成  
-また、１行目にutf-8で記述する旨を追加  
-
+Example:
+```bash
+$ hugo-new-post article-title
+/home/yuk1h1ra/[directories]/blog-with-hugo/content/posts/2020/11/article-title/index.md created
+```
