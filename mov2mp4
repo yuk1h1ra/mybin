@@ -1,0 +1,48 @@
+#!/bin/bash
+
+cat << EOT
+                      ____                  _  _
+ _ __ ___   _____   _|___ \ _ __ ___  _ __ | || |
+| '_ \` _ \ / _ \ \ / / __) | '_ \` _ \| '_ \| || |_
+| | | | | | (_) \ V / / __/| | | | | | |_) |__   _|
+|_| |_| |_|\___/ \_/ |_____|_| |_| |_| .__/   |_|
+                                     |_|
+EOT
+
+INPUT=$1
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) <file>.mov" >&2
+  exit 1
+fi
+
+EXTENS=${INPUT##*.}
+
+if [ ${EXTENS} != "mov" ]; then
+  echo "Usage: $(basename $0) <file>.mov" >&2
+  exit 1
+fi
+
+if [ ! -e $INPUT ]; then
+  echo "ERROR: Cannot find input file" >&2
+  exit 1
+fi
+
+OUTPUT=${INPUT/mov/mp4}
+
+sleep 3
+
+exec ffmpeg -i $INPUT \
+            -vf yadif \
+			-use_editlist 0 \
+            -force_key_frames 'expr:gte(t,n_forced/2)' -bf 2 \
+		    -c:v libx264 \
+			-crf 16 \
+            -c:a aac \
+			-q:a 1 \
+            -ac 2 \
+			-ar 48000 \
+            -pix_fmt yuv420p \
+            -movflags +faststart \
+            -f mp4 \
+            $OUTPUT

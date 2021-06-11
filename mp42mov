@@ -1,0 +1,41 @@
+#!/bin/bash
+
+cat << EOT
+                 _  _  ____
+ _ __ ___  _ __ | || ||___ \ _ __ ___   _____   __
+| '_ \` _ \\| '_ \\| || |_ __) | '_ \` _ \ / _ \ \ / /
+| | | | | | |_) |__   _/ __/| | | | | | (_) \ V /
+|_| |_| |_| .__/   |_||_____|_| |_| |_|\___/ \_/
+          |_|
+EOT
+
+INPUT=$1
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) <file>.mp4" >&2
+  exit 1
+fi
+
+EXTENS=${INPUT##*.}
+
+if [ ${EXTENS} != "mp4" ]; then
+  echo "Usage: $(basename $0) <file>.mp4" >&2
+  exit 1
+fi
+
+if [ ! -e $INPUT ]; then
+  echo "ERROR: Cannot find input file" >&2
+  exit 1
+fi
+
+OUTPUT=${INPUT/mp4/mov}
+
+sleep 3
+
+exec ffmpeg -i $INPUT \
+            -c:v dnxhd \
+            -profile:v dnxhr_hq \
+            -pix_fmt yuv422p \
+            -c:a pcm_s16le \
+            -f mov \
+            $OUTPUT
