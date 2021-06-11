@@ -2,11 +2,9 @@
 
 # 引数の数が１つではないとき、実行しない
 if [ $# -ne 1 ]; then
-  echo "Error: requires content-dir argument"
-  echo ""
-  echo "Usage:"
-  echo "  hugo-new-post content-dir"
+  echo "Error: Requires content-dir argument"
+  echo "Usage: hugo-new-post content-dir"
   exit 1
 fi
 
-hugo new posts/$(date +%Y)/$(date +%m)/$1/index.md -c posts/$(date +%Y)/$(date +%m)/$1/
+exec hugo new posts/$(date +%Y)/$(date +%m)/$1/index.md -c posts/$(date +%Y)/$(date +%m)/$1/
